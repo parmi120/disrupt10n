@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Responsive Full Screen Event Video</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #000000;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      height: 100%;
+      background: var(--bg);
+    }
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      min-height: 100dvh;
+      background: var(--bg);
+      overflow: hidden;
+    }
+    .video-stage {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100svh;
+      height: 100dvh;
+      background: var(--bg);
+      overflow: hidden;
+    }
+    .video-stage video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      background: var(--bg);
+    }
+    @media (orientation: portrait) {
+      .video-stage video {
+        object-position: center center;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .video-stage video {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="video-stage" aria-label="Full screen landing video">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      webkit-playsinline
+      preload="metadata"
+      poster="YOUR_POSTER_IMAGE.jpg"
+    >
+      <source src="YOUR_MOBILE_VIDEO_LINK.mp4" media="(max-width: 767px)" type="video/mp4" />
+      <source src="YOUR_VIDEO_LINK.mp4" media="(min-width: 768px)" type="video/mp4" />
+      <source src="YOUR_VIDEO_LINK.mp4" type="video/mp4" />
+    </video>
+  </main>
+</body>
+</html>
