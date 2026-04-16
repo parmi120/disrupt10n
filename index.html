@@ -3,22 +3,176 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Disrupt10n</title>
+  <title>Disrupt10n Video Landing</title>
   <style>
-    :root { --bg:#000; --hotspot-border:rgba(255,255,255,.55); --hotspot-fill:rgba(255,255,255,.08); --hotspot-fill-hover:rgba(255,255,255,.16); --hotspot-glow:0 0 0 1px rgba(255,255,255,.18),0 8px 30px rgba(0,0,0,.35); }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html,body{width:100%;height:100%;background:var(--bg);overflow:hidden}
-    body{min-height:100vh;min-height:100svh;min-height:100dvh;font-family:Arial,sans-serif}
-    .stage{position:fixed;inset:0;width:100vw;height:100vh;height:100svh;height:100dvh;background:var(--bg);overflow:hidden}
-    video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;background:var(--bg)}
-    .overlay{position:absolute;inset:0;z-index:2;pointer-events:none}
-    .hotspot{position:absolute;display:block;pointer-events:auto;border:1px solid var(--hotspot-border);background:var(--hotspot-fill);backdrop-filter:blur(2px);border-radius:999px;box-shadow:var(--hotspot-glow);transition:transform .2s ease,background .2s ease,border-color .2s ease;min-width:44px;min-height:44px}
-    .hotspot:hover,.hotspot:focus-visible{transform:scale(1.03);background:var(--hotspot-fill-hover);border-color:rgba(255,255,255,.9);outline:none}
-    .hotspot.event-one{left:18%;top:61%;width:24%;height:9%}
-    .hotspot.event-two{left:57%;top:61%;width:24%;height:9%}
-    @media (max-width:768px){.hotspot.event-one{left:12%;top:63%;width:32%;height:8%}.hotspot.event-two{left:56%;top:63%;width:32%;height:8%}}
-    @media (max-width:480px){.hotspot.event-one{left:10%;top:66%;width:35%;height:7.5%}.hotspot.event-two{left:55%;top:66%;width:35%;height:7.5%}}
-    @media (prefers-reduced-motion:reduce){.hotspot{transition:none}}
+    :root {
+      --bg: #000;
+      --hotspot-border: rgba(255,255,255,.6);
+      --hotspot-fill: rgba(255,255,255,.05);
+      --hotspot-fill-hover: rgba(255,255,255,.14);
+      --hotspot-text: #fff;
+      --hotspot-glow: 0 0 0 1px rgba(255,255,255,.16), 0 8px 30px rgba(0,0,0,.35);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      min-height: 100dvh;
+    }
+
+    .stage {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100svh;
+      height: 100dvh;
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      background: var(--bg);
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hotspot {
+      position: absolute;
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 1px solid var(--hotspot-border);
+      background: var(--hotspot-fill);
+      border-radius: 999px;
+      box-shadow: var(--hotspot-glow);
+      color: var(--hotspot-text);
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: .02em;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+      backdrop-filter: blur(2px);
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    .hotspot:hover,
+    .hotspot:focus-visible {
+      transform: scale(1.03);
+      background: var(--hotspot-fill-hover);
+      border-color: rgba(255,255,255,.95);
+      outline: none;
+    }
+
+    .hotspot .label {
+      display: flex;
+      flex-direction: column;
+      gap: .15rem;
+      line-height: 1.05;
+      padding: .25rem .5rem;
+    }
+
+    .hotspot .label small {
+      font-size: clamp(.65rem, 1vw, .8rem);
+      font-weight: 600;
+      opacity: .9;
+    }
+
+    .hotspot .label span {
+      font-size: clamp(.95rem, 1.4vw, 1.35rem);
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    /* desktop placement */
+    .event-one {
+      left: 15.5%;
+      top: 68%;
+      width: 27%;
+      height: 8%;
+    }
+
+    .event-two {
+      left: 53%;
+      top: 68%;
+      width: 31%;
+      height: 8%;
+    }
+
+    /* tablet */
+    @media (max-width: 768px) {
+      .event-one {
+        left: 10%;
+        top: 70%;
+        width: 34%;
+        height: 7%;
+      }
+
+      .event-two {
+        left: 53%;
+        top: 70%;
+        width: 37%;
+        height: 7%;
+      }
+    }
+
+    /* mobile */
+    @media (max-width: 480px) {
+      .event-one {
+        left: 8%;
+        top: 72%;
+        width: 38%;
+        height: 6.5%;
+      }
+
+      .event-two {
+        left: 54%;
+        top: 72%;
+        width: 38%;
+        height: 6.5%;
+      }
+
+      .hotspot .label small {
+        font-size: .6rem;
+      }
+
+      .hotspot .label span {
+        font-size: .78rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hotspot {
+        transition: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -26,9 +180,21 @@
     <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="poster.jpg">
       <source src="./DISRUPT10N - Website Concept (1).mp4" type="video/mp4" />
     </video>
+
     <div class="overlay">
-      <a class="hotspot event-one" href="https://example.com/event-1" target="_blank" rel="noopener noreferrer" aria-label="Open event 1 link"></a>
-      <a class="hotspot event-two" href="https://example.com/event-2" target="_blank" rel="noopener noreferrer" aria-label="Open event 2 link"></a>
+      <a class="hotspot event-one" href="https://example.com/event-1" target="_blank" rel="noopener noreferrer" aria-label="Purchase tickets here for event 1">
+        <div class="label">
+          <small>May 2nd</small>
+          <span>Purchase tickets here</span>
+        </div>
+      </a>
+
+      <a class="hotspot event-two" href="https://example.com/event-2" target="_blank" rel="noopener noreferrer" aria-label="Purchase tickets here for event 2">
+        <div class="label">
+          <small>May 30th</small>
+          <span>Purchase tickets here</span>
+        </div>
+      </a>
     </div>
   </main>
 </body>
