@@ -10,17 +10,17 @@
       --video-x: 50%;
       --video-y: 22%;
 
-      --one-left: 14%;
-      --one-top: 73%;
-      --one-width: 28%;
+      --btn-left: clamp(0.75rem, 14vw, 14%);
+      --btn-top: clamp(70%, 73vw, 73%);
+      --btn-width: clamp(10.5rem, 28vw, 24rem);
+      --btn-height: clamp(2.35rem, 4vw, 3.2rem);
+      --btn-pad-x: clamp(0.85rem, 1.3vw, 1.1rem);
+      --btn-radius: clamp(12px, 1vw, 16px);
+      --btn-font: clamp(0.7rem, 0.95vw, 1rem);
 
-      --two-left: 52%;
-      --two-top: 73%;
-      --two-width: 30%;
-
-      --btn-border: rgba(255, 230, 120, 0.65);
-      --btn-border-hover: rgba(255, 230, 120, 0.95);
-      --btn-bg: rgba(10, 16, 26, 0.18);
+      --btn-border: rgba(255, 230, 120, 0.66);
+      --btn-border-hover: rgba(255, 230, 120, 0.96);
+      --btn-bg: rgba(10, 16, 26, 0.16);
       --btn-bg-hover: rgba(20, 28, 40, 0.28);
       --btn-text: #fff8d6;
       --btn-shadow:
@@ -78,20 +78,21 @@
 
     .hotspot {
       position: absolute;
+      left: var(--btn-left);
+      top: var(--btn-top);
+      width: var(--btn-width);
+      height: var(--btn-height);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.55rem;
       pointer-events: auto;
-      min-width: 44px;
-      min-height: 44px;
-      height: clamp(2.4rem, 4.5vw, 3.15rem);
-      padding: 0 1rem;
-      border-radius: 14px;
+      padding-inline: var(--btn-pad-x);
+      border-radius: var(--btn-radius);
       border: 1px solid var(--btn-border);
       background: var(--btn-bg);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       box-shadow: var(--btn-shadow);
       color: var(--btn-text);
       text-decoration: none;
@@ -104,6 +105,7 @@
         background .2s ease,
         border-color .2s ease,
         box-shadow .2s ease;
+      max-width: calc(100vw - 2rem);
     }
 
     .hotspot:hover,
@@ -118,7 +120,7 @@
     }
 
     .hotspot span {
-      font-size: clamp(0.78rem, 1.1vw, 1rem);
+      font-size: var(--btn-font);
       white-space: nowrap;
     }
 
@@ -134,66 +136,53 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff8d6' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 7.5V6a2 2 0 0 0-2-2h-3.5a2 2 0 0 1-1.414-.586l-.172-.172a2 2 0 0 0-2.828 0l-.172.172A2 2 0 0 1 9.5 4H6a2 2 0 0 0-2 2v1.5a1.5 1.5 0 0 1 0 3V12a1.5 1.5 0 0 1 0 3V18a2 2 0 0 0 2 2h3.5a2 2 0 0 1 1.414.586l.172.172a2 2 0 0 0 2.828 0l.172-.172A2 2 0 0 1 15.5 20H19a2 2 0 0 0 2-2v-3a1.5 1.5 0 0 1 0-3v-1.5a1.5 1.5 0 0 1 0-3Z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E");
     }
 
-    .event-one {
-      left: var(--one-left);
-      top: var(--one-top);
-      width: var(--one-width);
-    }
-
-    .event-two {
-      left: var(--two-left);
-      top: var(--two-top);
-      width: var(--two-width);
-    }
-
-    @media (max-width: 1000px) {
+    @media (max-width: 1100px) {
       :root {
-        --video-y: 50%;
-        --one-top: 74%;
-        --two-top: 74%;
-        --one-left: 10%;
-        --two-left: 52%;
-        --one-width: 32%;
-        --two-width: 34%;
+        --video-y: 45%;
+        --btn-top: clamp(72%, 78vw, 80%);
+        --btn-width: clamp(10rem, 36vw, 18rem);
+        --btn-left: clamp(0.75rem, 8vw, 10%);
       }
     }
 
     @media (max-width: 700px) {
       :root {
         --video-y: 52%;
-        --one-top: 76%;
-        --two-top: 76%;
-        --one-left: 8%;
-        --two-left: 51%;
-        --one-width: 36%;
-        --two-width: 38%;
+        --btn-top: clamp(75%, 82vw, 84%);
+        --btn-width: clamp(9.5rem, 44vw, 15rem);
+        --btn-left: clamp(0.65rem, 6vw, 8%);
+        --btn-height: clamp(2.3rem, 8vw, 3rem);
+        --btn-font: clamp(0.68rem, 2.4vw, 0.82rem);
       }
     }
 
     @media (max-width: 480px) {
       :root {
         --video-y: 54%;
-        --one-top: 79%;
-        --two-top: 79%;
-        --one-left: 6%;
-        --two-left: 50%;
-        --one-width: 40%;
-        --two-width: 42%;
+        --btn-top: clamp(77%, 88vw, 86%);
+        --btn-width: clamp(9rem, 52vw, 14rem);
+        --btn-left: clamp(0.55rem, 4vw, 0.9rem);
+        --btn-height: clamp(2.25rem, 9vw, 2.85rem);
+        --btn-radius: 12px;
+        --btn-font: 0.68rem;
       }
 
       .hotspot {
-        padding: 0 0.75rem;
-        border-radius: 12px;
-      }
-
-      .hotspot span {
-        font-size: 0.7rem;
+        gap: 0.45rem;
       }
 
       .hotspot::after {
         width: 0.78rem;
         height: 0.78rem;
         flex-basis: 0.78rem;
+      }
+    }
+
+    @media (min-width: 1600px) {
+      :root {
+        --btn-width: clamp(16rem, 22vw, 28rem);
+        --btn-top: 73%;
+        --btn-left: 14%;
       }
     }
 
@@ -205,14 +194,14 @@
   </style>
 </head>
 <body>
-  <main class="stage" aria-label="Fullscreen event video with clickable hotspots">
+  <main class="stage" aria-label="Fullscreen event video with clickable hotspot">
     <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="poster.jpg">
       <source src="./DISRUPT10N - Website Concept (1).mp4" type="video/mp4" />
     </video>
 
     <div class="overlay">
       <a
-        class="hotspot event-one"
+        class="hotspot"
         href="https://dice.fm/event/dk2nee-disrupt10n-2nd-may-the-moon-club-lakota-bristol-tickets"
         target="_blank"
         rel="noopener noreferrer"
