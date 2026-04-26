@@ -27,9 +27,9 @@
         0 0 0 1px rgba(255, 220, 110, 0.08),
         0 10px 30px rgba(0, 0, 0, 0.30);
 
-      --ig-hitbox-top: clamp(1rem, 3vw, 2rem);
-      --ig-hitbox-right: clamp(1rem, 3vw, 2rem);
-      --ig-hitbox-size: clamp(2.2rem, 5vw, 3.4rem);
+      --ig-hitbox-top: clamp(0.9rem, 2.2vw, 1.7rem);
+      --ig-hitbox-right: clamp(0.9rem, 2.2vw, 1.7rem);
+      --ig-hitbox-size: clamp(2.1rem, 4.4vw, 3.1rem);
     }
 
     *, *::before, *::after {
@@ -70,7 +70,7 @@
       height: 100%;
       object-fit: cover;
       object-position: var(--video-x) var(--video-y);
-      background: var(--bg);
+      background: #111;
     }
 
     .overlay {
@@ -152,6 +152,23 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff8d6' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 7.5V6a2 2 0 0 0-2-2h-3.5a2 2 0 0 1-1.414-.586l-.172-.172a2 2 0 0 0-2.828 0l-.172.172A2 2 0 0 1 9.5 4H6a2 2 0 0 0-2 2v1.5a1.5 1.5 0 0 1 0 3V12a1.5 1.5 0 0 1 0 3V18a2 2 0 0 0 2 2h3.5a2 2 0 0 1 1.414.586l.172.172a2 2 0 0 0 2.828 0l.172-.172A2 2 0 0 1 15.5 20H19a2 2 0 0 0 2-2v-3a1.5 1.5 0 0 1 0-3v-1.5a1.5 1.5 0 0 1 0-3Z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E");
     }
 
+    .video-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      color: white;
+      background: #000;
+      z-index: 1;
+    }
+
+    .video-fallback.show {
+      display: flex;
+    }
+
     @media (max-width: 1100px) {
       :root {
         --video-y: 45%;
@@ -211,9 +228,25 @@
 </head>
 <body>
   <main class="stage" aria-label="Fullscreen event video with clickable hotspot">
-    <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="poster.jpg">
+    <video
+      id="heroVideo"
+      autoplay
+      muted
+      loop
+      playsinline
+      webkit-playsinline
+      preload="auto"
+      poster="poster.jpg"
+    >
       <source src="./DISRUPT10N - Website Concept (1).mp4" type="video/mp4" />
     </video>
+
+    <div id="videoFallback" class="video-fallback">
+      <div>
+        <p>Video failed to load.</p>
+        <p style="opacity:.75; margin-top:.5rem;">Check the MP4 filename/path and make sure poster.jpg exists.</p>
+      </div>
+    </div>
 
     <div class="overlay">
       <a
@@ -235,5 +268,25 @@
       </a>
     </div>
   </main>
+
+  <script>
+    const video = document.getElementById('heroVideo');
+    const fallback = document.getElementById('videoFallback');
+
+    video.addEventListener('error', () => {
+      fallback.classList.add('show');
+    });
+
+    video.addEventListener('loadeddata', () => {
+      fallback.classList.remove('show');
+    });
+
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        fallback.classList.add('show');
+      });
+    }
+  </script>
 </body>
 </html>
