@@ -7,42 +7,201 @@
   <style>
     :root {
       --bg: #000;
-      --hotspot-border: rgba(255,255,255,.55);
-      --hotspot-fill: rgba(255,255,255,.08);
-      --hotspot-fill-hover: rgba(255,255,255,.16);
-      --hotspot-glow: 0 0 0 1px rgba(255,255,255,.18), 0 8px 30px rgba(0,0,0,.35);
       --video-x: 50%;
       --video-y: 22%;
+
       --one-left: 14%;
       --one-top: 73%;
       --one-width: 28%;
+
       --two-left: 52%;
       --two-top: 73%;
       --two-width: 30%;
+
+      --btn-border: rgba(255, 230, 120, 0.65);
+      --btn-border-hover: rgba(255, 230, 120, 0.95);
+      --btn-bg: rgba(10, 16, 26, 0.18);
+      --btn-bg-hover: rgba(20, 28, 40, 0.28);
+      --btn-text: #fff8d6;
+      --btn-shadow:
+        0 0 0 1px rgba(255, 220, 110, 0.08),
+        0 10px 30px rgba(0, 0, 0, 0.30);
     }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html,body{width:100%;height:100%;background:var(--bg);overflow:hidden}
-    body{min-height:100vh;min-height:100svh;min-height:100dvh;font-family:Arial,sans-serif}
-    .stage{position:fixed;inset:0;width:100vw;height:100vh;height:100svh;height:100dvh;background:var(--bg);overflow:hidden}
-    video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--video-x) var(--video-y);background:var(--bg)}
-    .overlay{position:absolute;inset:0;z-index:2;pointer-events:none}
-    .hotspot{position:absolute;display:flex;align-items:center;justify-content:center;pointer-events:auto;border:1px solid var(--hotspot-border);background:var(--hotspot-fill);backdrop-filter:blur(2px);border-radius:999px;box-shadow:var(--hotspot-glow);transition:transform .2s ease,background .2s ease,border-color .2s ease;min-width:44px;min-height:44px;color:#fff;text-decoration:none;text-align:center;padding:.25rem .45rem;font-weight:700;line-height:1.05}
-    .hotspot:hover,.hotspot:focus-visible{transform:scale(1.03);background:var(--hotspot-fill-hover);border-color:rgba(255,255,255,.9);outline:none}
-    .hotspot span{font-size:clamp(.72rem,1.2vw,1rem);display:block}
-    .event-one{left:var(--one-left);top:var(--one-top);width:var(--one-width);height:clamp(2.1rem,4.5vw,3rem)}
-    .event-two{left:var(--two-left);top:var(--two-top);width:var(--two-width);height:clamp(2.1rem,4.5vw,3rem)}
-    @media (max-width: 1000px){
-      :root{--video-y:50%;--one-top:74%;--two-top:74%;--one-left:10%;--two-left:52%;--one-width:32%;--two-width:34%}
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    @media (max-width: 700px){
-      :root{--video-y:52%;--one-top:76%;--two-top:76%;--one-left:8%;--two-left:51%;--one-width:36%;--two-width:38%}
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      overflow: hidden;
     }
-    @media (max-width: 480px){
-      :root{--video-y:54%;--one-top:79%;--two-top:79%;--one-left:6%;--two-left:50%;--one-width:40%;--two-width:42%}
-      .hotspot{padding:.35rem .45rem}
-      .hotspot span{font-size:.68rem}
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      min-height: 100dvh;
+      font-family: Arial, sans-serif;
     }
-    @media (prefers-reduced-motion:reduce){.hotspot{transition:none}}
+
+    .stage {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100svh;
+      height: 100dvh;
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: var(--video-x) var(--video-y);
+      background: var(--bg);
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hotspot {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      pointer-events: auto;
+      min-width: 44px;
+      min-height: 44px;
+      height: clamp(2.4rem, 4.5vw, 3.15rem);
+      padding: 0 1rem;
+      border-radius: 14px;
+      border: 1px solid var(--btn-border);
+      background: var(--btn-bg);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      box-shadow: var(--btn-shadow);
+      color: var(--btn-text);
+      text-decoration: none;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      line-height: 1;
+      transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .hotspot:hover,
+    .hotspot:focus-visible {
+      transform: translateY(-1px) scale(1.02);
+      background: var(--btn-bg-hover);
+      border-color: var(--btn-border-hover);
+      box-shadow:
+        0 0 0 1px rgba(255, 230, 120, 0.14),
+        0 14px 34px rgba(0, 0, 0, 0.38);
+      outline: none;
+    }
+
+    .hotspot span {
+      font-size: clamp(0.78rem, 1.1vw, 1rem);
+      white-space: nowrap;
+    }
+
+    .hotspot::after {
+      content: "";
+      width: 0.85rem;
+      height: 0.85rem;
+      flex: 0 0 0.85rem;
+      opacity: 0.95;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff8d6' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 7.5V6a2 2 0 0 0-2-2h-3.5a2 2 0 0 1-1.414-.586l-.172-.172a2 2 0 0 0-2.828 0l-.172.172A2 2 0 0 1 9.5 4H6a2 2 0 0 0-2 2v1.5a1.5 1.5 0 0 1 0 3V12a1.5 1.5 0 0 1 0 3V18a2 2 0 0 0 2 2h3.5a2 2 0 0 1 1.414.586l.172.172a2 2 0 0 0 2.828 0l.172-.172A2 2 0 0 1 15.5 20H19a2 2 0 0 0 2-2v-3a1.5 1.5 0 0 1 0-3v-1.5a1.5 1.5 0 0 1 0-3Z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E");
+    }
+
+    .event-one {
+      left: var(--one-left);
+      top: var(--one-top);
+      width: var(--one-width);
+    }
+
+    .event-two {
+      left: var(--two-left);
+      top: var(--two-top);
+      width: var(--two-width);
+    }
+
+    @media (max-width: 1000px) {
+      :root {
+        --video-y: 50%;
+        --one-top: 74%;
+        --two-top: 74%;
+        --one-left: 10%;
+        --two-left: 52%;
+        --one-width: 32%;
+        --two-width: 34%;
+      }
+    }
+
+    @media (max-width: 700px) {
+      :root {
+        --video-y: 52%;
+        --one-top: 76%;
+        --two-top: 76%;
+        --one-left: 8%;
+        --two-left: 51%;
+        --one-width: 36%;
+        --two-width: 38%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --video-y: 54%;
+        --one-top: 79%;
+        --two-top: 79%;
+        --one-left: 6%;
+        --two-left: 50%;
+        --one-width: 40%;
+        --two-width: 42%;
+      }
+
+      .hotspot {
+        padding: 0 0.75rem;
+        border-radius: 12px;
+      }
+
+      .hotspot span {
+        font-size: 0.7rem;
+      }
+
+      .hotspot::after {
+        width: 0.78rem;
+        height: 0.78rem;
+        flex-basis: 0.78rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hotspot {
+        transition: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -50,9 +209,27 @@
     <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="poster.jpg">
       <source src="./DISRUPT10N - Website Concept (1).mp4" type="video/mp4" />
     </video>
+
     <div class="overlay">
-      <a class="hotspot event-one" href="https://example.com/event-1" target="_blank" rel="noopener noreferrer" aria-label="Purchase tickets here for event 1"><span>Purchase tickets here</span></a>
-      <a class="hotspot event-two" href="https://example.com/event-2" target="_blank" rel="noopener noreferrer" aria-label="Purchase tickets here for event 2"><span>Purchase tickets here</span></a>
+      <a
+        class="hotspot event-one"
+        href="https://example.com/event-1"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Buy now for event 1"
+      >
+        <span>Buy Now</span>
+      </a>
+
+      <a
+        class="hotspot event-two"
+        href="https://example.com/event-2"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Buy now for event 2"
+      >
+        <span>Buy Now</span>
+      </a>
     </div>
   </main>
 </body>
