@@ -2,25 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="RDAC landing page with artwork, branding, and clickable buttons." />
-  <title>RDAC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Disrupt10n Video Landing</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
     :root {
-      --bg: #0b0b0b;
-      --frame: rgba(255,255,255,0.1);
-      --glow: rgba(255,255,255,0.08);
-      --shadow: 0 20px 60px rgba(0,0,0,0.45);
-      --radius: clamp(1rem, 2vw, 2rem);
-      --space: clamp(0.75rem, 2vw, 1.5rem);
-      --max-width: min(94vw, 1440px);
-      --text: #f2f2f2;
-      --muted: rgba(255,255,255,0.72);
-      --btn-bg: rgba(255,255,255,0.07);
-      --btn-border: rgba(255,255,255,0.18);
-      --btn-hover: rgba(255,255,255,0.13);
+      --bg: #000;
+      --video-x: 50%;
+      --video-y: 22%;
+
+      --btn-left: clamp(3rem, 14vw, 18%);
+      --btn-top: clamp(70%, 74vh, 78%);
+      --btn-width: clamp(12rem, 26vw, 24rem);
+      --btn-height: clamp(2.8rem, 5vw, 3.6rem);
+      --btn-pad-x: clamp(1rem, 1.4vw, 1.35rem);
+      --btn-radius: clamp(12px, 1vw, 16px);
+      --btn-font: clamp(0.8rem, 1vw, 1rem);
+
+      --btn-border: rgba(255, 230, 120, 0.66);
+      --btn-border-hover: rgba(255, 230, 120, 0.96);
+      --btn-bg: rgba(10, 16, 26, 0.16);
+      --btn-bg-hover: rgba(20, 28, 40, 0.28);
+      --btn-text: #fff8d6;
+      --btn-shadow:
+        0 0 0 1px rgba(255, 220, 110, 0.08),
+        0 10px 30px rgba(0, 0, 0, 0.30);
+
+      --ig-top: clamp(0.25rem, 0.9vw, 0.75rem);
+      --ig-right: clamp(8.75rem, 0.9vw, 0.75rem);
+      --ig-size: clamp(6rem, 8vw, 7rem);
     }
 
     *, *::before, *::after {
@@ -30,134 +39,197 @@
     }
 
     html, body {
-      min-height: 100%;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      overflow: hidden;
     }
 
     body {
       min-height: 100dvh;
-      display: grid;
-      place-items: center;
-      padding: var(--space);
-      background:
-        radial-gradient(circle at top, var(--glow), transparent 28%),
-        linear-gradient(180deg, #050505 0%, var(--bg) 100%);
-      overflow-x: hidden;
-      font-family: "Inter", Arial, sans-serif;
-      color: var(--text);
+      font-family: Arial, sans-serif;
     }
 
-    main {
-      width: 100%;
-      display: grid;
-      place-items: center;
-    }
-
-    .page {
-      width: min(100%, 1440px);
-      display: grid;
-      gap: 1rem;
-      justify-items: center;
-    }
-
-    .image-shell {
-      width: var(--max-width);
-      border: 1px solid var(--frame);
-      border-radius: var(--radius);
+    .stage {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100dvh;
+      background: var(--bg);
       overflow: hidden;
-      box-shadow: var(--shadow);
-      background: #111;
-      position: relative;
-      line-height: 0;
     }
 
-    img {
-      display: block;
+    video {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: auto;
-      object-fit: contain;
-      aspect-ratio: 16 / 9;
+      height: 100%;
+      object-fit: cover;
+      object-position: var(--video-x) var(--video-y);
+      background: #111;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
       pointer-events: none;
-      user-select: none;
     }
 
-    .buttons {
-      width: min(var(--max-width), 100%);
-      display: flex;
-      flex-wrap: wrap;
+    .instagram-hitbox {
+      position: absolute;
+      top: var(--ig-top);
+      right: var(--ig-right);
+      width: var(--ig-size);
+      height: var(--ig-size);
+      pointer-events: auto;
+      z-index: 3;
+      background: transparent;
+      border-radius: 999px;
+    }
+
+    .hotspot {
+      position: absolute;
+      left: var(--btn-left);
+      top: var(--btn-top);
+      width: var(--btn-width);
+      min-width: 10rem;
+      height: var(--btn-height);
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
-      gap: 0.75rem;
-      padding: 0 0.25rem;
-    }
-
-    .btn {
-      appearance: none;
+      gap: 0.55rem;
+      pointer-events: auto;
+      padding-inline: var(--btn-pad-x);
+      border-radius: var(--btn-radius);
       border: 1px solid var(--btn-border);
       background: var(--btn-bg);
-      color: var(--text);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: var(--btn-shadow);
+      color: var(--btn-text);
       text-decoration: none;
-      padding: 0.95rem 1.25rem;
-      border-radius: 999px;
-      font-size: clamp(0.9rem, 1vw, 1rem);
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      line-height: 1;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      min-width: 9rem;
       text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      line-height: 1;
+      transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+      max-width: calc(100vw - 2rem);
     }
 
-    .btn:hover,
-    .btn:focus-visible {
-      transform: translateY(-1px);
-      background: var(--btn-hover);
-      border-color: rgba(255,255,255,0.32);
+    .hotspot:hover,
+    .hotspot:focus-visible {
+      transform: translateY(-1px) scale(1.02);
+      background: var(--btn-bg-hover);
+      border-color: var(--btn-border-hover);
+      box-shadow:
+        0 0 0 1px rgba(255, 230, 120, 0.14),
+        0 14px 34px rgba(0, 0, 0, 0.38);
       outline: none;
     }
 
-    @media (max-width: 640px) {
+    .hotspot span {
+      font-size: var(--btn-font);
+      white-space: nowrap;
+    }
+
+    .hotspot::after {
+      content: "";
+      width: 0.9rem;
+      height: 0.9rem;
+      flex: 0 0 0.9rem;
+      opacity: 0.95;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff8d6' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 7.5V6a2 2 0 0 0-2-2h-3.5a2 2 0 0 1-1.414-.586l-.172-.172a2 2 0 0 0-2.828 0l-.172.172A2 2 0 0 1 9.5 4H6a2 2 0 0 0-2 2v1.5a1.5 1.5 0 0 1 0 3V12a1.5 1.5 0 0 1 0 3V18a2 2 0 0 0 2 2h3.5a2 2 0 0 1 1.414.586l.172.172a2 2 0 0 0 2.828 0l.172-.172A2 2 0 0 1 15.5 20H19a2 2 0 0 0 2-2v-3a1.5 1.5 0 0 1 0-3v-1.5a1.5 1.5 0 0 1 0-3Z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E");
+    }
+
+    @media (max-width: 1100px) {
       :root {
-        --max-width: 100%;
+        --video-y: 45%;
+        --btn-top: clamp(72%, 76vh, 80%);
+        --btn-width: clamp(11rem, 34vw, 20rem);
+        --btn-left: clamp(2.5rem, 12vw, 16%);
+      }
+    }
+
+    @media (max-width: 700px) {
+      :root {
+        --video-y: 52%;
+        --btn-top: clamp(74%, 80vh, 84%);
+        --btn-width: clamp(10.5rem, 46vw, 16rem);
+        --btn-left: clamp(2rem, 10vw, 14%);
+        --btn-height: clamp(2.6rem, 8vw, 3rem);
+        --btn-font: clamp(0.72rem, 2.4vw, 0.88rem);
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --video-y: 54%;
+        --btn-top: clamp(76%, 86vh, 86%);
+        --btn-width: clamp(10rem, 58vw, 15rem);
+        --btn-left: clamp(1.5rem, 8vw, 10%);
+        --btn-height: clamp(2.5rem, 9vw, 2.95rem);
+        --btn-radius: 12px;
+        --btn-font: 0.75rem;
       }
 
-      .buttons {
-        gap: 0.6rem;
+      .hotspot {
+        gap: 0.45rem;
       }
 
-      .btn {
-        min-width: 8rem;
-        padding: 0.85rem 1rem;
-        font-size: 0.88rem;
+      .hotspot::after {
+        width: 0.82rem;
+        height: 0.82rem;
+        flex-basis: 0.82rem;
+      }
+    }
+
+    @media (min-width: 1600px) {
+      :root {
+        --btn-width: clamp(16rem, 20vw, 28rem);
+        --btn-top: 73%;
+        --btn-left: 18%;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .btn {
+      .hotspot {
         transition: none;
       }
     }
   </style>
 </head>
 <body>
-  <main>
-    <div class="page">
-      <figure class="image-shell">
-        <img
-          src="./rdac-cover.jpg"
-          alt="RDAC cover artwork with silver lettering and a spade symbol on a black background."
-          width="1600"
-          height="900"
-          loading="eager"
-          decoding="async"
-        />
-      </figure>
+  <main class="stage" aria-label="Fullscreen event video with clickable hotspot">
+    <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="poster.jpg">
+      <source src="./DISRUPT10N - Website Concept (1).mp4" type="video/mp4" />
+    </video>
 
-      <nav class="buttons" aria-label="Primary links">
-        <a class="btn" href="https://example.com/full-volume" target="_blank" rel="noopener noreferrer">Full Volume</a>
-        <a class="btn" href="https://example.com/v29-music" target="_blank" rel="noopener noreferrer">V29 Music</a>
-        <a class="btn" href="https://example.com/amplivibe" target="_blank" rel="noopener noreferrer">AmpliVibe</a>
-      </nav>
+    <div class="overlay">
+      <a
+        class="instagram-hitbox"
+        href="https://www.instagram.com/disrupt10n_"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visit Instagram"
+      ></a>
+
+      <a
+        class="hotspot"
+        href="https://dice.fm/event/dk2nee-disrupt10n-2nd-may-the-moon-club-lakota-bristol-tickets"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Buy now for Bristol"
+      >
+        <span>Buy Now</span>
+      </a>
     </div>
   </main>
 </body>
