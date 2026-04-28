@@ -19,41 +19,55 @@
       --btn-radius: clamp(12px, 1vw, 16px);
       --icon-size: clamp(0.82rem, 1vw, 1rem);
       --cta-max: 44rem;
-      --video-scale: 1;
-      --video-x: 50%;
-      --video-y: 22%;
     }
 
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; width: 100%; min-height: 100%; background: var(--bg); overflow-x: hidden; }
-    body { min-height: 100dvh; font-family: Arial, sans-serif; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
 
-    .stage { position: relative; width: 100vw; min-height: 100dvh; overflow: hidden; background: var(--bg); }
+    html, body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    body {
+      min-height: 100dvh;
+      font-family: Arial, sans-serif;
+    }
+
+    .stage {
+      position: relative;
+      width: 100vw;
+      height: 100dvh;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
     .video-shell {
       position: absolute;
       inset: 0;
       overflow: hidden;
       background: #111;
     }
+
     video {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: translate(-50%, -50%) scale(var(--video-scale));
-      transform-origin: center center;
+      object-position: center center;
       background: #111;
-      min-width: 100%;
-      min-height: 100%;
       display: block;
     }
 
     .overlay {
-      position: relative;
+      position: absolute;
+      inset: 0;
       z-index: 2;
-      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -127,34 +141,90 @@
       box-shadow: 0 0 0 1px rgba(255, 230, 120, 0.14), 0 14px 34px rgba(0, 0, 0, 0.38);
     }
 
-    .hotspot span { font-size: var(--btn-font); white-space: nowrap; max-width: 100%; }
-    .hotspot::after { content: ""; width: var(--icon-size); height: var(--icon-size); flex: 0 0 var(--icon-size); opacity: 0.95; background-repeat: no-repeat; background-position: center; background-size: contain; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff8d6' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 7.5V6a2 2 0 0 0-2-2h-3.5a2 2 0 0 1-1.414-.586l-.172-.172a2 2 0 0 0-2.828 0l-.172.172A2 2 0 0 1 9.5 4H6a2 2 0 0 0-2 2v1.5a1.5 1.5 0 0 1 0 3V12a1.5 1.5 0 0 1 0 3V18a2 2 0 0 0 2 2h3.5a2 2 0 0 1 1.414.586l.172.172a2 2 0 0 0 2.828 0l.172-.172A2 2 0 0 1 15.5 20H19a2 2 0 0 0 2-2v-3a1.5 1.5 0 0 1 0-3v-1.5a1.5 1.5 0 0 1 0-3Z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E"); }
+    .hotspot span {
+      font-size: var(--btn-font);
+      white-space: nowrap;
+      max-width: 100%;
+    }
+
+    .hotspot::after {
+      content: "";
+      width: var(--icon-size);
+      height: var(--icon-size);
+      flex: 0 0 var(--icon-size);
+      opacity: 0.95;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff8d6' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 7.5V6a2 2 0 0 0-2-2h-3.5a2 2 0 0 1-1.414-.586l-.172-.172a2 2 0 0 0-2.828 0l-.172.172A2 2 0 0 1 9.5 4H6a2 2 0 0 0-2 2v1.5a1.5 1.5 0 0 1 0 3V12a1.5 1.5 0 0 1 0 3V18a2 2 0 0 0 2 2h3.5a2 2 0 0 1 1.414.586l.172.172a2 2 0 0 0 2.828 0l.172-.172A2 2 0 0 1 15.5 20H19a2 2 0 0 0 2-2v-3a1.5 1.5 0 0 1 0-3v-1.5a1.5 1.5 0 0 1 0-3Z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E");
+    }
 
     @media (max-width: 1100px) {
-      :root { --cta-max: 34rem; --video-scale: 1.08; --video-y: 45%; }
+      :root {
+        --cta-max: 34rem;
+      }
     }
 
     @media (max-width: 700px) {
-      :root { --cta-max: 28rem; --btn-font: clamp(0.74rem, 2.6vw, 0.9rem); --btn-height: clamp(2.45rem, 10vw, 3rem); --video-scale: 1.18; --video-y: 50%; }
-      .overlay { padding: 10px; }
+      :root {
+        --cta-max: 28rem;
+        --btn-font: clamp(0.74rem, 2.6vw, 0.9rem);
+        --btn-height: clamp(2.45rem, 10vw, 3rem);
+      }
+
+      .overlay {
+        padding: 10px;
+      }
     }
 
     @media (max-width: 520px) {
-      :root { --cta-max: 100%; --btn-font: 0.72rem; --btn-height: 2.6rem; --video-scale: 1.28; --video-y: 54%; }
-      .overlay { padding: 8px; }
-      .instagram-hitbox { width: 2.6rem; height: 2.6rem; }
-      .hotspot { gap: 0.4rem; border-radius: 12px; padding-inline: 0.85rem; }
-      .hotspot::after { width: 0.78rem; height: 0.78rem; flex-basis: 0.78rem; }
+      :root {
+        --cta-max: 100%;
+        --btn-font: 0.72rem;
+        --btn-height: 2.6rem;
+      }
+
+      .overlay {
+        padding: 8px;
+      }
+
+      .instagram-hitbox {
+        width: 2.6rem;
+        height: 2.6rem;
+      }
+
+      .hotspot {
+        gap: 0.4rem;
+        border-radius: 12px;
+        padding-inline: 0.85rem;
+      }
+
+      .hotspot::after {
+        width: 0.78rem;
+        height: 0.78rem;
+        flex-basis: 0.78rem;
+      }
     }
 
     @media (max-width: 380px) {
-      :root { --btn-font: 0.68rem; --btn-height: 2.45rem; --video-scale: 1.34; --video-y: 56%; }
-      .overlay { padding: 6px; }
-      .cta-row { gap: 8px; }
+      :root {
+        --btn-font: 0.68rem;
+        --btn-height: 2.45rem;
+      }
+
+      .overlay {
+        padding: 6px;
+      }
+
+      .cta-row {
+        gap: 8px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .hotspot { transition: none; }
+      .hotspot {
+        transition: none;
+      }
     }
   </style>
 </head>
@@ -165,14 +235,31 @@
         <source src="./DISRUPT10N - Website Concept (1).mp4" type="video/mp4" />
       </video>
     </div>
+
     <div class="overlay">
       <div class="top-actions">
-        <a class="instagram-hitbox" href="https://www.instagram.com/disrupt10n_" target="_blank" rel="noopener noreferrer" aria-label="Visit Instagram"></a>
+        <a
+          class="instagram-hitbox"
+          href="https://www.instagram.com/disrupt10n_"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visit Instagram"
+        ></a>
       </div>
+
       <div></div>
+
       <div class="cta-wrap">
         <div class="cta-row">
-          <a class="hotspot" href="https://dice.fm/event/dk2nee-disrupt10n-2nd-may-the-moon-club-lakota-bristol-tickets" target="_blank" rel="noopener noreferrer" aria-label="Buy now for Bristol"><span>Buy Now</span></a>
+          <a
+            class="hotspot"
+            href="https://dice.fm/event/dk2nee-disrupt10n-2nd-may-the-moon-club-lakota-bristol-tickets"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Buy now for Bristol"
+          >
+            <span>Buy Now</span>
+          </a>
         </div>
       </div>
     </div>
