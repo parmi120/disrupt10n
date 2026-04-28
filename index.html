@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Disrupt10n</title>
+  <title>Disrupt10n Video Landing</title>
   <style>
     :root {
       --bg: #000;
-      --video-x: 50%;
       --video-y: 22%;
+      --pad: clamp(12px, 2vw, 32px);
       --btn-border: rgba(255, 230, 120, 0.66);
       --btn-border-hover: rgba(255, 230, 120, 0.96);
       --btn-bg: rgba(10, 16, 26, 0.18);
@@ -16,32 +16,141 @@
       --btn-text: #fff8d6;
       --btn-shadow: 0 10px 30px rgba(0, 0, 0, 0.30);
       --btn-font: clamp(0.8rem, 1vw, 1rem);
-      --btn-height: clamp(2.6rem, 5.5vw, 3.6rem);
+      --btn-height: clamp(2.6rem, 5vw, 3.6rem);
       --btn-radius: clamp(12px, 1vw, 16px);
       --icon-size: clamp(0.82rem, 1vw, 1rem);
-      --pad: clamp(0.75rem, 2vw, 2rem);
       --cta-max: 44rem;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; min-height: 100%; background: var(--bg); overflow-x: hidden; }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; min-height: 100%; background: var(--bg); overflow-x: hidden; }
     body { min-height: 100dvh; font-family: Arial, sans-serif; }
-    .stage { position: relative; width: 100vw; min-height: 100dvh; background: var(--bg); overflow: hidden; isolation: isolate; }
-    video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--video-x) var(--video-y); background: #111; transform: scale(1.01); }
-    .overlay { position: relative; z-index: 2; min-height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; padding: var(--pad); pointer-events: none; }
-    .top-actions, .cta-wrap { pointer-events: auto; }
-    .top-actions { display: flex; justify-content: flex-end; align-items: flex-start; }
-    .instagram-hitbox { display: inline-flex; align-items: center; justify-content: center; width: clamp(2.8rem, 6vw, 4.25rem); height: clamp(2.8rem, 6vw, 4.25rem); border-radius: 999px; text-decoration: none; background: transparent; flex: 0 0 auto; }
-    .cta-wrap { display: flex; justify-content: center; align-self: end; padding-bottom: clamp(0.25rem, 1vh, 0.75rem); width: 100%; }
-    .cta-row { width: min(100%, var(--cta-max)); display: grid; gap: clamp(0.75rem, 1.8vw, 1rem); }
-    .hotspot { width: 100%; min-height: var(--btn-height); display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem; padding-inline: clamp(1rem, 1.6vw, 1.35rem); border-radius: var(--btn-radius); border: 1px solid var(--btn-border); background: var(--btn-bg); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: var(--btn-shadow); color: var(--btn-text); text-decoration: none; text-align: center; font-weight: 600; letter-spacing: 0.01em; line-height: 1; transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease; max-width: 100%; }
-    .hotspot:hover, .hotspot:focus-visible { transform: translateY(-1px) scale(1.01); background: var(--btn-bg-hover); border-color: var(--btn-border-hover); box-shadow: 0 0 0 1px rgba(255, 230, 120, 0.14), 0 14px 34px rgba(0, 0, 0, 0.38); outline: none; }
-    .hotspot span { font-size: var(--btn-font); white-space: nowrap; }
-    .hotspot::after { content: ""; width: var(--icon-size); height: var(--icon-size); flex: 0 0 var(--icon-size); opacity: 0.95; background-repeat: no-repeat; background-position: center; background-size: contain; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff8d6' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 7.5V6a2 2 0 0 0-2-2h-3.5a2 2 0 0 1-1.414-.586l-.172-.172a2 2 0 0 0-2.828 0l-.172.172A2 2 0 0 1 9.5 4H6a2 2 0 0 0-2 2v1.5a1.5 1.5 0 0 1 0 3V12a1.5 1.5 0 0 1 0 3V18a2 2 0 0 0 2 2h3.5a2 2 0 0 1 1.414.586l.172.172a2 2 0 0 0 2.828 0l.172-.172A2 2 0 0 1 15.5 20H19a2 2 0 0 0 2-2v-3a1.5 1.5 0 0 1 0-3v-1.5a1.5 1.5 0 0 1 0-3Z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E"); }
-    @media (max-width: 1100px) { :root { --video-y: 45%; --cta-max: 34rem; } }
-    @media (max-width: 700px) { :root { --video-y: 52%; --cta-max: 26rem; --btn-font: clamp(0.75rem, 2.4vw, 0.9rem); } .overlay { padding: clamp(0.7rem, 2.5vw, 1rem); } .hotspot { min-height: clamp(2.55rem, 8vw, 3rem); } }
-    @media (max-width: 480px) { :root { --video-y: 54%; --cta-max: 100%; --btn-font: 0.75rem; } .overlay { padding: 0.75rem; } .instagram-hitbox { width: 2.75rem; height: 2.75rem; } .cta-row { gap: 0.65rem; } .hotspot { gap: 0.45rem; border-radius: 12px; } .hotspot::after { width: 0.82rem; height: 0.82rem; flex-basis: 0.82rem; } }
-    @media (min-width: 1600px) { :root { --video-y: 22%; --cta-max: 44rem; } }
-    @media (prefers-reduced-motion: reduce) { .hotspot { transition: none; } }
+
+    .stage { position: relative; width: 100vw; min-height: 100dvh; overflow: hidden; background: var(--bg); }
+    video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center var(--video-y); background: #111; }
+
+    .overlay {
+      position: relative;
+      z-index: 2;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: var(--pad);
+      pointer-events: none;
+    }
+
+    .top-actions {
+      pointer-events: auto;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+
+    .instagram-hitbox {
+      width: clamp(2.8rem, 6vw, 4.25rem);
+      height: clamp(2.8rem, 6vw, 4.25rem);
+      border-radius: 999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+
+    .cta-wrap {
+      pointer-events: auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      width: 100%;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .cta-row {
+      width: min(100%, var(--cta-max));
+      display: grid;
+      gap: clamp(10px, 2vw, 18px);
+      margin-inline: auto;
+    }
+
+    .hotspot {
+      width: 100%;
+      min-height: var(--btn-height);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding-inline: clamp(0.9rem, 1.4vw, 1.35rem);
+      border-radius: var(--btn-radius);
+      border: 1px solid var(--btn-border);
+      background: var(--btn-bg);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: var(--btn-shadow);
+      color: var(--btn-text);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      line-height: 1;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      overflow: hidden;
+    }
+
+    .hotspot:hover,
+    .hotspot:focus-visible {
+      transform: translateY(-1px);
+      background: var(--btn-bg-hover);
+      border-color: var(--btn-border-hover);
+      outline: none;
+      box-shadow: 0 0 0 1px rgba(255, 230, 120, 0.14), 0 14px 34px rgba(0, 0, 0, 0.38);
+    }
+
+    .hotspot span {
+      font-size: var(--btn-font);
+      white-space: nowrap;
+      max-width: 100%;
+    }
+
+    .hotspot::after {
+      content: "";
+      width: var(--icon-size);
+      height: var(--icon-size);
+      flex: 0 0 var(--icon-size);
+      opacity: 0.95;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff8d6' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 7.5V6a2 2 0 0 0-2-2h-3.5a2 2 0 0 1-1.414-.586l-.172-.172a2 2 0 0 0-2.828 0l-.172.172A2 2 0 0 1 9.5 4H6a2 2 0 0 0-2 2v1.5a1.5 1.5 0 0 1 0 3V12a1.5 1.5 0 0 1 0 3V18a2 2 0 0 0 2 2h3.5a2 2 0 0 1 1.414.586l.172.172a2 2 0 0 0 2.828 0l.172-.172A2 2 0 0 1 15.5 20H19a2 2 0 0 0 2-2v-3a1.5 1.5 0 0 1 0-3v-1.5a1.5 1.5 0 0 1 0-3Z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E");
+    }
+
+    @media (max-width: 1100px) {
+      :root { --video-y: 45%; --cta-max: 34rem; }
+    }
+
+    @media (max-width: 700px) {
+      :root { --video-y: 52%; --cta-max: 28rem; --btn-font: clamp(0.74rem, 2.6vw, 0.9rem); --btn-height: clamp(2.45rem, 10vw, 3rem); }
+      .overlay { padding: 10px; }
+      .cta-row { gap: 10px; }
+    }
+
+    @media (max-width: 520px) {
+      :root { --video-y: 54%; --cta-max: 100%; --btn-font: 0.72rem; --btn-height: 2.6rem; }
+      .overlay { padding: 8px; }
+      .instagram-hitbox { width: 2.6rem; height: 2.6rem; }
+      .hotspot { gap: 0.4rem; border-radius: 12px; padding-inline: 0.85rem; }
+      .hotspot::after { width: 0.78rem; height: 0.78rem; flex-basis: 0.78rem; }
+    }
+
+    @media (max-width: 380px) {
+      :root { --video-y: 56%; --btn-font: 0.68rem; --btn-height: 2.45rem; }
+      .overlay { padding: 6px; }
+      .cta-row { gap: 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hotspot { transition: none; }
+    }
   </style>
 </head>
 <body>
@@ -49,6 +158,7 @@
     <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="poster.jpg">
       <source src="./DISRUPT10N - Website Concept (1).mp4" type="video/mp4" />
     </video>
+
     <div class="overlay">
       <div class="top-actions">
         <a class="instagram-hitbox" href="https://www.instagram.com/disrupt10n_" target="_blank" rel="noopener noreferrer" aria-label="Visit Instagram"></a>
