@@ -3,33 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Disrupt10n Video Landing</title>
+  <title>Disrupt10n</title>
   <style>
     :root {
       --bg: #000;
       --video-x: 50%;
       --video-y: 22%;
-
-      --btn-left: clamp(3rem, 14vw, 18%);
-      --btn-top: clamp(70%, 74vh, 78%);
-      --btn-width: clamp(12rem, 26vw, 24rem);
-      --btn-height: clamp(2.8rem, 5vw, 3.6rem);
-      --btn-pad-x: clamp(1rem, 1.4vw, 1.35rem);
-      --btn-radius: clamp(12px, 1vw, 16px);
-      --btn-font: clamp(0.8rem, 1vw, 1rem);
-
+      --content-pad: clamp(0.75rem, 2vw, 2rem);
+      --content-max: 44rem;
       --btn-border: rgba(255, 230, 120, 0.66);
       --btn-border-hover: rgba(255, 230, 120, 0.96);
-      --btn-bg: rgba(10, 16, 26, 0.16);
-      --btn-bg-hover: rgba(20, 28, 40, 0.28);
+      --btn-bg: rgba(10, 16, 26, 0.18);
+      --btn-bg-hover: rgba(20, 28, 40, 0.3);
       --btn-text: #fff8d6;
-      --btn-shadow:
-        0 0 0 1px rgba(255, 220, 110, 0.08),
-        0 10px 30px rgba(0, 0, 0, 0.30);
-
-      --ig-top: clamp(0.25rem, 0.9vw, 0.75rem);
-      --ig-right: clamp(8.75rem, 0.9vw, 0.75rem);
-      --ig-size: clamp(6rem, 8vw, 7rem);
+      --btn-shadow: 0 10px 30px rgba(0, 0, 0, 0.30);
+      --btn-font: clamp(0.8rem, 1vw, 1rem);
+      --btn-height: clamp(2.6rem, 5.5vw, 3.6rem);
+      --btn-radius: clamp(12px, 1vw, 16px);
+      --icon-size: clamp(0.82rem, 1vw, 1rem);
     }
 
     *, *::before, *::after {
@@ -38,25 +29,27 @@
       padding: 0;
     }
 
-    html, body {
+    html {
       width: 100%;
-      height: 100%;
+      min-height: 100%;
       background: var(--bg);
-      overflow: hidden;
     }
 
     body {
+      width: 100%;
       min-height: 100dvh;
+      background: var(--bg);
+      overflow-x: hidden;
       font-family: Arial, sans-serif;
     }
 
     .stage {
-      position: fixed;
-      inset: 0;
+      position: relative;
       width: 100vw;
-      height: 100dvh;
+      min-height: 100dvh;
       background: var(--bg);
       overflow: hidden;
+      isolation: isolate;
     }
 
     video {
@@ -67,40 +60,61 @@
       object-fit: cover;
       object-position: var(--video-x) var(--video-y);
       background: #111;
+      transform: scale(1.01);
     }
 
     .overlay {
-      position: absolute;
-      inset: 0;
+      position: relative;
       z-index: 2;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: var(--content-pad);
       pointer-events: none;
     }
 
-    .instagram-hitbox {
-      position: absolute;
-      top: var(--ig-top);
-      right: var(--ig-right);
-      width: var(--ig-size);
-      height: var(--ig-size);
+    .top-actions {
+      display: flex;
+      justify-content: flex-end;
       pointer-events: auto;
-      z-index: 3;
-      background: transparent;
+    }
+
+    .instagram-hitbox {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: clamp(2.8rem, 6vw, 4.25rem);
+      height: clamp(2.8rem, 6vw, 4.25rem);
       border-radius: 999px;
+      text-decoration: none;
+      background: transparent;
+      flex: 0 0 auto;
+    }
+
+    .cta-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      pointer-events: auto;
+      padding-bottom: clamp(0.25rem, 1vh, 0.75rem);
+    }
+
+    .cta-row {
+      width: min(100%, var(--content-max));
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(0.75rem, 1.8vw, 1rem);
     }
 
     .hotspot {
-      position: absolute;
-      left: var(--btn-left);
-      top: var(--btn-top);
-      width: var(--btn-width);
-      min-width: 10rem;
-      height: var(--btn-height);
+      width: 100%;
+      min-height: var(--btn-height);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.55rem;
-      pointer-events: auto;
-      padding-inline: var(--btn-pad-x);
+      padding-inline: clamp(1rem, 1.6vw, 1.35rem);
       border-radius: var(--btn-radius);
       border: 1px solid var(--btn-border);
       background: var(--btn-bg);
@@ -113,22 +127,16 @@
       font-weight: 600;
       letter-spacing: 0.01em;
       line-height: 1;
-      transition:
-        transform .2s ease,
-        background .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease;
-      max-width: calc(100vw - 2rem);
+      transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+      max-width: 100%;
     }
 
     .hotspot:hover,
     .hotspot:focus-visible {
-      transform: translateY(-1px) scale(1.02);
+      transform: translateY(-1px) scale(1.01);
       background: var(--btn-bg-hover);
       border-color: var(--btn-border-hover);
-      box-shadow:
-        0 0 0 1px rgba(255, 230, 120, 0.14),
-        0 14px 34px rgba(0, 0, 0, 0.38);
+      box-shadow: 0 0 0 1px rgba(255, 230, 120, 0.14), 0 14px 34px rgba(0, 0, 0, 0.38);
       outline: none;
     }
 
@@ -139,9 +147,9 @@
 
     .hotspot::after {
       content: "";
-      width: 0.9rem;
-      height: 0.9rem;
-      flex: 0 0 0.9rem;
+      width: var(--icon-size);
+      height: var(--icon-size);
+      flex: 0 0 var(--icon-size);
       opacity: 0.95;
       background-repeat: no-repeat;
       background-position: center;
@@ -150,59 +158,32 @@
     }
 
     @media (max-width: 1100px) {
-      :root {
-        --video-y: 45%;
-        --btn-top: clamp(72%, 76vh, 80%);
-        --btn-width: clamp(11rem, 34vw, 20rem);
-        --btn-left: clamp(2.5rem, 12vw, 16%);
-      }
+      :root { --video-y: 45%; --content-max: 34rem; }
     }
 
     @media (max-width: 700px) {
-      :root {
-        --video-y: 52%;
-        --btn-top: clamp(74%, 80vh, 84%);
-        --btn-width: clamp(10.5rem, 46vw, 16rem);
-        --btn-left: clamp(2rem, 10vw, 14%);
-        --btn-height: clamp(2.6rem, 8vw, 3rem);
-        --btn-font: clamp(0.72rem, 2.4vw, 0.88rem);
-      }
+      :root { --video-y: 52%; --content-max: 26rem; --btn-font: clamp(0.75rem, 2.4vw, 0.9rem); }
+      .overlay { padding: clamp(0.7rem, 2.5vw, 1rem); }
+      .cta-wrap { padding-bottom: 0.5rem; }
+      .hotspot { min-height: clamp(2.55rem, 8vw, 3rem); }
     }
 
     @media (max-width: 480px) {
-      :root {
-        --video-y: 54%;
-        --btn-top: clamp(76%, 86vh, 86%);
-        --btn-width: clamp(10rem, 58vw, 15rem);
-        --btn-left: clamp(1.5rem, 8vw, 10%);
-        --btn-height: clamp(2.5rem, 9vw, 2.95rem);
-        --btn-radius: 12px;
-        --btn-font: 0.75rem;
-      }
-
-      .hotspot {
-        gap: 0.45rem;
-      }
-
-      .hotspot::after {
-        width: 0.82rem;
-        height: 0.82rem;
-        flex-basis: 0.82rem;
-      }
+      :root { --video-y: 54%; --btn-font: 0.75rem; --content-max: 100%; }
+      .overlay { padding: 0.75rem; }
+      .top-actions { justify-content: flex-end; }
+      .instagram-hitbox { width: 2.75rem; height: 2.75rem; }
+      .cta-row { gap: 0.65rem; }
+      .hotspot { gap: 0.45rem; border-radius: 12px; }
+      .hotspot::after { width: 0.82rem; height: 0.82rem; flex-basis: 0.82rem; }
     }
 
     @media (min-width: 1600px) {
-      :root {
-        --btn-width: clamp(16rem, 20vw, 28rem);
-        --btn-top: 73%;
-        --btn-left: 18%;
-      }
+      :root { --video-y: 22%; --content-max: 44rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .hotspot {
-        transition: none;
-      }
+      .hotspot { transition: none; }
     }
   </style>
 </head>
@@ -213,23 +194,29 @@
     </video>
 
     <div class="overlay">
-      <a
-        class="instagram-hitbox"
-        href="https://www.instagram.com/disrupt10n_"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Visit Instagram"
-      ></a>
+      <div class="top-actions">
+        <a
+          class="instagram-hitbox"
+          href="https://www.instagram.com/disrupt10n_"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visit Instagram"
+        ></a>
+      </div>
 
-      <a
-        class="hotspot"
-        href="https://dice.fm/event/dk2nee-disrupt10n-2nd-may-the-moon-club-lakota-bristol-tickets"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Buy now for Bristol"
-      >
-        <span>Buy Now</span>
-      </a>
+      <div class="cta-wrap">
+        <div class="cta-row">
+          <a
+            class="hotspot"
+            href="https://dice.fm/event/dk2nee-disrupt10n-2nd-may-the-moon-club-lakota-bristol-tickets"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Buy now for Bristol"
+          >
+            <span>Buy Now</span>
+          </a>
+        </div>
+      </div>
     </div>
   </main>
 </body>
