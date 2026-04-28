@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Disrupt10n Video</title>
+  <title>Disrupt10n Video Landing</title>
   <style>
     :root {
       --bg: #000;
@@ -53,6 +53,7 @@
       align-items: center;
       justify-content: center;
       background: #000;
+      z-index: 1;
     }
 
     video {
@@ -68,23 +69,20 @@
       position: absolute;
       inset: 0;
       z-index: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: var(--pad);
       pointer-events: none;
     }
 
     .top-actions {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 3;
       pointer-events: auto;
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
     }
 
     .instagram-hitbox {
-      width: clamp(1rem, 6vw, 4.25rem);
-      height: clamp(2rem, 6vw, 4.25rem);
+      width: clamp(2.8rem, 6vw, 4.25rem);
+      height: clamp(2.8rem, 6vw, 4.25rem);
       border-radius: 999px;
       text-decoration: none;
       display: inline-flex;
@@ -94,12 +92,17 @@
     }
 
     .cta-wrap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 3;
       pointer-events: auto;
       display: flex;
       justify-content: center;
       align-items: flex-end;
       width: 100%;
-      padding-bottom: env(safe-area-inset-bottom);
+      padding: 0 var(--pad) calc(var(--pad) + env(safe-area-inset-bottom));
     }
 
     .cta-row {
@@ -161,16 +164,18 @@
 
     @media (max-width: 1100px) {
       :root { --cta-max: 34rem; }
+      .top-actions { top: 10px; left: 10px; }
     }
 
     @media (max-width: 700px) {
       :root { --cta-max: 28rem; --btn-font: clamp(0.74rem, 2.6vw, 0.9rem); --btn-height: clamp(2.45rem, 10vw, 3rem); }
-      .overlay { padding: 10px; }
+      .top-actions { top: 8px; left: 8px; }
+      .cta-wrap { padding: 0 10px calc(10px + env(safe-area-inset-bottom)); }
     }
 
     @media (max-width: 520px) {
       :root { --cta-max: 100%; --btn-font: 0.72rem; --btn-height: 2.6rem; }
-      .overlay { padding: 8px; }
+      .top-actions { top: 6px; left: 6px; }
       .instagram-hitbox { width: 2.6rem; height: 2.6rem; }
       .hotspot { gap: 0.4rem; border-radius: 12px; padding-inline: 0.85rem; }
       .hotspot::after { width: 0.78rem; height: 0.78rem; flex-basis: 0.78rem; }
@@ -178,7 +183,8 @@
 
     @media (max-width: 380px) {
       :root { --btn-font: 0.68rem; --btn-height: 2.45rem; }
-      .overlay { padding: 6px; }
+      .top-actions { top: 5px; left: 5px; }
+      .cta-wrap { padding: 0 6px calc(6px + env(safe-area-inset-bottom)); }
       .cta-row { gap: 8px; }
     }
 
@@ -205,8 +211,6 @@
           aria-label="Visit Instagram"
         ></a>
       </div>
-
-      <div></div>
 
       <div class="cta-wrap">
         <div class="cta-row">
